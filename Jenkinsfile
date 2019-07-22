@@ -5,8 +5,8 @@ pipeline {
         COVERITY_TOOL_HOME="/Applications/cov-analysis-macosx-2019.06"
         PATH="$PATH:$M2_HOME/bin:$COVERITY_TOOL_HOME/bin"
         COV_HOST = '192.168.56.101'
-		COV_PORT = '8080'
-		COV_USER = 'admin'
+        COV_PORT = '8080'
+        COV_USER = 'admin'
     }
     options {
         skipStagesAfterUnstable()
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('cov-configure') { 
             steps {
-				sh 'cov-configure --config idir/conf.xml --java'
+                sh 'cov-configure --config idir/conf.xml --java'
             }
         }
         stage('cov-build') { 
