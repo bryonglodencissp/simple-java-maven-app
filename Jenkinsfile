@@ -7,7 +7,6 @@ pipeline {
         COV_HOST = '192.168.56.101'
 		COV_PORT = '8080'
 		COV_USER = 'admin'
-		COV_PASS = 'SIGpass8!'
     }
     options {
         skipStagesAfterUnstable()
@@ -18,9 +17,19 @@ pipeline {
                 sh 'mvn -B -DskipTests clean'
             }
         }
-        stage('Confif') { 
+        stage('cov-configure') { 
             steps {
 				sh 'cov-configure --config idir/conf.xml --java'
+            }
+        }
+        stage('cov-build') { 
+            steps {
+                sh 'cov-build --config idir/conf.xml --dir idir mvn -B -DskipTests clean package'
+            }
+        }
+        stage('cov-analyze') { 
+            steps {
+                sh 'cov-analyze --config idir/conf.xml --dir idir --all --strip-path ${WORKSPACE}'
             }
         }
     }
