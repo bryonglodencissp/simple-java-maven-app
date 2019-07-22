@@ -6,7 +6,6 @@ pipeline {
         PATH="$PATH:$M2_HOME/bin:$COVERITY_TOOL_HOME/bin"
         COV_HOST = '192.168.56.101'
         COV_PORT = '8080'
-        COV_USER = 'admin'
     }
     options {
         skipStagesAfterUnstable()
