@@ -28,7 +28,7 @@ pipeline {
         }
         stage('cov-analyze') { 
             steps {
-                sh 'cov-analyze --config idir/conf.xml --dir idir --all --strip-path ${WORKSPACE}'
+                sh 'cov-analyze --config idir/conf.xml --dir idir --all --strip-path ${WORKSPACE} --allow-unmerged-emits'
             }
         }
     }
