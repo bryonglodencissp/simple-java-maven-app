@@ -1,7 +1,10 @@
 pipeline {
     agent any
-    tools {
-        maven 'apache-maven-3.6.1' 
+    environment { 
+        MAVEN_HOME = '/usr/local/Cellar/maven/3.6.1/libexec/bin'
+    }
+    options {
+        skipStagesAfterUnstable()
     }
     stages {
         stage('Build') { 
