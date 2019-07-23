@@ -22,7 +22,7 @@ else
 	mvn -B -DskipTests clean
 	cov-configure --config idir/conf.xml --java
 	cov-build --config idir/conf.xml --dir idir --delete-stale-tus --desktop mvn -B -DskipTests package
-	cov-analyze --config idir/conf.xml --dir idir --all --strip-path `pwd` --allow-unmerged-emits --disable-fb --export-summaries false
+	cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --exit1-if-defects true --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --analyze-scm-modified --scm git
 	if [ $? -eq 1 ]
 	then
 		echo "cov-analyze found defects"
