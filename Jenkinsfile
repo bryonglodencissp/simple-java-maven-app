@@ -23,7 +23,7 @@ pipeline {
         }
         stage('cov-build') { 
             steps {
-                sh 'cov-build --config idir/conf.xml --dir idir mvn -B -DskipTests clean package'
+                sh 'cov-build --config idir/conf.xml --dir idir mvn -B -DskipTests package'
             }
         }
         stage('cov-analyze') { 
