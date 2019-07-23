@@ -9,14 +9,24 @@
 COVERITY_TOOL_HOME="/Applications/cov-analysis-macosx-2019.06"
 PATH="$PATH:$COVERITY_TOOL_HOME/bin"
 
-cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --exit1-if-defects true --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --analyze-scm-modified --scm git
-if [ $? -eq 1 ]
+if [ -d "idir" ]
 then
-	echo "cov-run-desktop found defects"
-	echo "Stop the commit"
-	exit 1
+	cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --exit1-if-defects true --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --analyze-scm-modified --scm git
+	if [ $? -eq 1 ]
+	then
+		echo "cov-run-desktop found defects"
+		echo "Stop the commit"
+		exit 1
+	else
+		echo "cov-run-desktop did not find defects"
+		echo "Do not stop commit"
+		exit 0
+	fi
 else
-	echo "cov-run-desktop did not find defects"
-	echo "Do not stop commit"
-	exit 0
+	M2_HOME='/usr/local/Cellar/maven/3.6.1/libexec'
+	PATH="$PATH:$M2_HOME/bin"
+	mvn -B -DskipTests clean
+	cov-configure --config idir/conf.xml --java
+	cov-build --config idir/conf.xml --dir idir --delete-stale-tus --desktop mvn -B -DskipTests package
+	cov-analyze --config idir/conf.xml --dir idir --all --strip-path `pwd` --allow-unmerged-emits --disable-fb --export-summaries false
 fi
