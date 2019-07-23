@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage('Delta') {
             steps {
-                sh 'git whatchanged -n --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt'
-                sh 'date > timestamp'
+                // sh 'git whatchanged --since="`cat timestamp`" --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt'
+                // sh 'date > timestamp'
             }
         }
         stage('Clean') { 
