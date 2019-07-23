@@ -11,12 +11,6 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-        stage('Delta') {
-            steps {
-                // sh 'git whatchanged --since="`cat timestamp`" --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt'
-                sh 'date > timestamp'
-            }
-        }
         stage('Clean') { 
             steps {
                 sh 'mvn -B -DskipTests clean'
@@ -35,7 +29,7 @@ pipeline {
         stage('cov-analyze') { 
             steps {
                 sh 'cov-analyze --config idir/conf.xml --dir idir --all --strip-path ${WORKSPACE} --allow-unmerged-emits --disable-fb --export-summaries false'
-                //  sh 'cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --analyze-scm-modified --scm git'
+                //  sh 'cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --exit1-if-defects true --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --analyze-scm-modified --scm git'
             }
         }
     }
