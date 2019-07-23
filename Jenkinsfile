@@ -13,7 +13,8 @@ pipeline {
     stages {
         stage('Delta') {
             steps {
-                sh 'git whatchanged -n --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt || rm -f filelist.txt'
+                sh 'git whatchanged -n --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt'
+                sh 'date > timestamp'
             }
         }
         stage('Clean') { 
@@ -29,6 +30,7 @@ pipeline {
         stage('cov-build') { 
             steps {
                 sh 'cov-build --config idir/conf.xml --dir idir --delete-stale-tus --desktop mvn -B -DskipTests package'
+                //  sh 'cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --analyze-scm-modified --scm git > cov-errors.txt'
             }
         }
         stage('cov-analyze') { 
