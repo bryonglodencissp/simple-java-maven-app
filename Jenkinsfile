@@ -11,6 +11,11 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
+        stage('Delta') {
+	        steps {
+                sh 'git whatchanged -n --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt || rm -f filelist.txt'
+	        }
+	    }
         stage('Clean') { 
             steps {
                 sh 'mvn -B -DskipTests clean'
@@ -23,7 +28,7 @@ pipeline {
         }
         stage('cov-build') { 
             steps {
-                sh 'cov-build --config idir/conf.xml --dir idir --delete-stale-tus mvn -B -DskipTests package'
+                sh 'cov-build --config idir/conf.xml --dir idir --delete-stale-tus --desktop mvn -B -DskipTests package'
             }
         }
         stage('cov-analyze') { 
