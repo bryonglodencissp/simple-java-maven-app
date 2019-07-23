@@ -19,7 +19,7 @@ public class App
         return message;
     }
 }
-
+/*
 class BadLockObjectExamples {
     // This is the most correct way to do this. Create an immutable object of
     // type object which is used only as a lock. Do this instead of any of the
@@ -27,7 +27,7 @@ class BadLockObjectExamples {
     private final Object myLock = new Object();
     public void TheCorrectWay() {
         synchronized(myLock) {
-            /* ... some critical section ... */
+            // ... some critical section ... 
         }
     }
     // Yes, Java will let you do this, but it is a very bad idea. String
@@ -116,7 +116,7 @@ class BadLockObjectExamples {
     public void DontGuardAMutableFieldByLockingOnThatField() {
         synchronized(myList) {
             myList = new ArrayList<Object>();
-            /* ... other critical section operations ... */
+            // ... other critical section operations ... 
         }
     }
 }
@@ -165,5 +165,5 @@ class BCWCExamples  {
             }
         }
     }
-    
 }
+*/
