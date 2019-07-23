@@ -14,8 +14,8 @@ pipeline {
         stage('Delta') {
             steps {
                 sh 'git whatchanged -n --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt || rm -f filelist.txt'
-	        }
-	    }
+            }
+        }
         stage('Clean') { 
             steps {
                 sh 'mvn -B -DskipTests clean'
