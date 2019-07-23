@@ -12,7 +12,7 @@ pipeline {
     }
     stages {
         stage('Delta') {
-	        steps {
+            steps {
                 sh 'git whatchanged -n --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt || rm -f filelist.txt'
 	        }
 	    }
