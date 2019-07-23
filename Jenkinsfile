@@ -14,7 +14,7 @@ pipeline {
         stage('Delta') {
             steps {
                 // sh 'git whatchanged --since="`cat timestamp`" --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt'
-                // sh 'date > timestamp'
+                sh 'date > timestamp'
             }
         }
         stage('Clean') { 
