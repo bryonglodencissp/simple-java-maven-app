@@ -1,4 +1,0 @@
-Coverity Desktop Analysis version 2019.06 on Darwin 18.6.0 x86_64
-cov-run-desktop operating in disconnected mode due to user request.
-[STATUS] Getting modified files from git...
-There are no files selected for analysis by --analyze-scm-modified.

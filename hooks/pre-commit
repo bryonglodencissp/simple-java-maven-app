@@ -11,7 +11,11 @@ PATH="$PATH:$COVERITY_TOOL_HOME/bin"
 
 if cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --exit1-if-defects true --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --analyze-scm-modified --scm git
 then
+	echo "cov-run-desktop found defects"
+	echo "Stop the commit"
 	exit 1
 else
+	echo "cov-run-desktop did not find defects"
+	echo "Do not stop commit"
 	exit 0
 fi
