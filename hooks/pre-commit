@@ -23,4 +23,14 @@ else
 	cov-configure --config idir/conf.xml --java
 	cov-build --config idir/conf.xml --dir idir --delete-stale-tus --desktop mvn -B -DskipTests package
 	cov-analyze --config idir/conf.xml --dir idir --all --strip-path `pwd` --allow-unmerged-emits --disable-fb --export-summaries false
+	if [ $? -eq 1 ]
+	then
+		echo "cov-analyze found defects"
+		echo "Stop the commit"
+		exit 1
+	else
+		echo "cov-analyze did not find defects"
+		echo "Do not stop commit"
+		exit 0
+	fi
 fi
