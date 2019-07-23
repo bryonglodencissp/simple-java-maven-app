@@ -1,5 +1,4 @@
 #!/bin/sh
-
 COVERITY_TOOL_HOME="/Applications/cov-analysis-macosx-2019.06"
 PATH="$PATH:$COVERITY_TOOL_HOME/bin"
 
