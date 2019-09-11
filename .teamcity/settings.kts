@@ -46,7 +46,7 @@ object Demo : BuildType({
             runnerArgs = "-Dmaven.test.failure.ignore=true -DskipTests"
         }
         script {
-            name = "Initialize (1)"
+            name = "Analyze"
             scriptContent = """
                 pwd;
                 cov-capture --project-dir ./;
