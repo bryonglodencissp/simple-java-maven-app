@@ -15,5 +15,7 @@ contains a shell script with commands that are executed when Jenkins processes
 the "Deliver" stage of your Pipeline.
 
 # execute script
+```console
 mvn -B -DskipTests clean package
 java -jar ~/Workspace/cim_api_example_java/simple-java-maven-app/target/my-app-1.0-SNAPSHOT.jar
+```
