@@ -19,7 +19,7 @@ public class App
         return message;
     }
 }
-/*
+
 class BadLockObjectExamples {
     // This is the most correct way to do this. Create an immutable object of
     // type object which is used only as a lock. Do this instead of any of the
@@ -166,4 +166,4 @@ class BCWCExamples  {
         }
     }
 }
-*/
+
