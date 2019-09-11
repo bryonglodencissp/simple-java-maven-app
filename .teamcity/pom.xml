@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <name>SimpleJavaMavenApp1 Config DSL Script</name>
-  <groupId>SimpleJavaMavenApp1</groupId>
-  <artifactId>SimpleJavaMavenApp1_dsl</artifactId>
+  <name>_Root Config DSL Script</name>
+  <groupId>_Root</groupId>
+  <artifactId>_Root_dsl</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <parent>

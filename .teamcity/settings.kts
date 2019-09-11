@@ -1,7 +1,4 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -28,39 +25,19 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2019.1"
 
 project {
+    description = "Contains all other projects"
 
-    buildType(Build)
+    features {
+        feature {
+            id = "PROJECT_EXT_1"
+            type = "ReportTab"
+            param("startPage", "coverage.zip!index.html")
+            param("title", "Code Coverage")
+            param("type", "BuildReportTab")
+        }
+    }
+
+    cleanup {
+        preventDependencyCleanup = false
+    }
 }
-
-object Build : BuildType({
-    name = "Build"
-
-    vcs {
-        root(DslContext.settingsRoot)
-    }
-
-    steps {
-        maven {
-            enabled = false
-            goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
-        }
-        maven {
-            goals = "clean package"
-            runnerArgs = "-Dmaven.test.failure.ignore=true -DskipTests"
-        }
-        script {
-            name = "Coverity"
-            scriptContent = """
-                pwd;
-                cov-capture --project-dir ./;
-                cov-analyze --dir idir --webapp-security --disable-fb --export-summaries false;
-            """.trimIndent()
-        }
-    }
-
-    triggers {
-        vcs {
-        }
-    }
-})
