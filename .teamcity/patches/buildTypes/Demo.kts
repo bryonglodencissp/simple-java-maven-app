@@ -38,7 +38,7 @@ changeBuildType(RelativeId("Demo")) {
                     #!/bin/sh
                     COVERITY_TOOL_HOME="/Applications/cov-analysis-macosx-2019.06"
                     PATH="${'$'}PATH:${'$'}COVERITY_TOOL_HOME/bin"
-                    rm filelist.txt; git whatchanged -n 1 --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt; echo "cat filelist.txt"; cat filelist.txt;
+                    rm filelist.txt; git whatchanged -n 1 --oneline --name-only --pretty=format: | sort | uniq | grep . > filelist.txt; echo "cat filelist.txt"; cat filelist.txt; echo "git diff"; git diff;
                     if [ -d "idir" ]
                     then
                     	cov-run-desktop --config idir/conf.xml --dir idir --disconnected --text-output cov-errors.txt --exit1-if-defects true --present-in-reference false --set-new-defect-owner false --ignore-uncapturable-inputs true --strip-path `pwd` --all --disable-fb --scm git filelist.txt
